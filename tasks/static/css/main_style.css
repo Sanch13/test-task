@@ -1,0 +1,119 @@
+.main-text {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.name-user {
+    font-family: "Droid Sans Mono Dotted", fantasy;
+    font-size: 1.3em;
+    color: #67a13e;
+    position: relative;
+    left: 10px;
+}
+
+.text-1 {
+    text-align: center;
+    padding: 15px 15px;
+}
+
+.just-text {
+    padding: 15px 15px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+.col-12 {
+    text-align: center;
+}
+
+.row {
+    justify-content: center;
+}
+
+nav {
+    background: #3e3f3f;
+    box-shadow: 0 0 10px rgba(20, 20, 20, 0.86);
+}
+
+.navbar-nav {
+    margin: 2px auto;
+}
+
+nav .nav-link:hover {
+    background: rgba(255, 255, 255, 0.07);
+    color: #b3afaf;
+}
+
+nav .nav-link {
+    margin: 0 15px;
+    padding: 3px 3px;
+    color: #b3afaf;
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(20, 20, 20, 0.66);
+}
+
+html {
+    height: 100%;
+
+}
+
+body {
+    padding: -0px;
+    margin: 0px;
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    font-size: 1.05em;
+}
+
+
+footer {
+    box-shadow: 0 0 10px rgba(20, 20, 20, 0.86);
+    padding: 20px 0;
+    background: #3C3D41;
+    color: #f3ece1;
+}
+
+.container {
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+.footer-col {
+    width: 33.3333333333%;
+    float: right;
+}
+
+.footer-col a {
+    color: #f3ece1;
+}
+
+.footer-col:last-child {
+    text-align: right;
+}
+
+.social-bar-wrap {
+    text-align: center;
+}
+
+.social-bar-wrap a {
+    padding: 0 7px;
+    font-size: 14px;
+}
+
+.main-page {
+    text-align: center;
+}
+
+.main-text {
+    font-size: 16px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.form-reg {
+    text-align: center;
+}
