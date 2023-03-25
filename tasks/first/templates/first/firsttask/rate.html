@@ -1,0 +1,36 @@
+{% extends 'first/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="just-text">
+        <h3>Курсы на {{ date|date:"d.m.Y" }}</h3>
+    </div>
+    {% for obj in data %}
+        <style>
+            table {
+                table-layout: fixed;
+                width: 40%;
+                border-collapse: collapse;
+                margin: 0 auto;
+            }
+
+            td, th {
+                border: 1px solid black;
+                padding: 2px;
+            }
+
+            th {
+                text-align: left;
+                background-color: #f2f2f2;
+            }
+        </style>
+        <table>
+            <tr>
+                <td style="width: 20px">{{ obj.Cur_Scale }}</td>
+                <td style="width: 20px">{{ obj.Cur_Abbreviation }}</td>
+                <td style="width: 60px">{{ obj.Cur_Name }}</td>
+                <td style="width: 30px">{{ obj.Cur_OfficialRate }} BYN</td>
+            </tr>
+        </table>
+    {% endfor %}
+{% endblock %}

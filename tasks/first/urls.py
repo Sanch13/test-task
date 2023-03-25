@@ -5,6 +5,6 @@ from .views import *
 app_name = 'first'
 
 urlpatterns = [
-    path('', index, name='index'),
-
+    path('firsttask/', firsttask, name='firsttask'),
+    path('rate/<str:cur_date>/', rate, name='rate'),
 ]

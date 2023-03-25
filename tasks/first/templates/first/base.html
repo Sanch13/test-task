@@ -15,6 +15,35 @@
     {% endblock css %}
 </head>
 <body>
-    <h2>Main page</h2>
+<div class="container-xxl">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-lg">
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page"
+                       href="{% url 'first:firsttask' %}">First task</a>
+                    <a class="nav-link" href="">Second task</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<main class="body-content">
+    <div class="container-xxl body-content">
+        {% block content %}
+           <div class="just-text">
+            <h4>Чтобы проверить технические задания нажмите на соответствующие кнопки меню</h4>
+           </div>
+        {% endblock %}
+    </div>
+</main>
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
+</html>
+

@@ -1,3 +1,8 @@
 from django.db import models
 
-# Create your models here.
+
+class RateDay(models.Model):
+    date = models.DateField(unique=True)
+    data = models.JSONField()
+
+
