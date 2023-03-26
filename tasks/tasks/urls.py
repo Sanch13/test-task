@@ -21,5 +21,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('admin/', admin.site.urls),
     path('first/', include('first.urls', namespace='first')),
+    path('second/', include('second.urls', namespace='second')),
 
 ]
