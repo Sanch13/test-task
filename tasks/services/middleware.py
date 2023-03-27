@@ -104,4 +104,4 @@ def compare_currency_rate(cur_date: date, cur_id: int, cur_rate: float) -> str:
             return f"Курс остался прежним"
     except Exception as error:
         logger_2.error(f"Не смог получить данные, ошибка: ", error)
-        # что тут делать дальше?
+        # что тут делать дальше???
