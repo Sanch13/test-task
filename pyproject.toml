@@ -10,6 +10,7 @@ packages = [{include = "test_task"}]
 python = "^3.11"
 django = "^4.1.7"
 requests = "^2.28.2"
+loguru = "^0.6.0"
 
 
 [build-system]

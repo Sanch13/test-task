@@ -8,13 +8,13 @@
         {% csrf_token %}
         <div class="container">
             <div class="row">
-                <div class="col-sm-12" align="center">
+                <div class="col-sm-2">
                     {{ form.date }}
                 </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-success" type="submit">Узнать курс</button>
+                </div>
             </div>
-        </div>
-        <div class="just-text">
-            <button class="btn btn-success" type="submit">Узнать курс</button>
         </div>
     </form>
 {% endblock %}

@@ -12,10 +12,11 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='RatesDay',
+            name='RateDay',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date', models.DateField(unique=True)),
+                ('date', models.DateField()),
+                ('cur_id', models.PositiveIntegerField()),
                 ('data', models.JSONField()),
             ],
         ),
