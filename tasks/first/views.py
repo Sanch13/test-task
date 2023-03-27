@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+
 from first.forms import DateForm
 from logs.settings import logger_1
 from first.models import RatesDay
@@ -30,7 +31,7 @@ def firsttask(request):
                 logger_1.success(f"Успешная запись в БД")
                 return redirect("first:rate", cur_date=cur_date)
             except Exception as error:
-                logger_1.error(f"Не смог записать  в БД", error)  # что тут делать?
+                logger_1.error(f"Не смог записать  в БД", error)  # что тут делать дальше?
 
     form = DateForm()
     context = {
@@ -39,7 +40,7 @@ def firsttask(request):
     return render(request, "first/firsttask.html", context=context)
 
 
-def rate(request, cur_date=''):  # как тут лучше поступить с cur_date=''?
+def rate(request, cur_date):  # как тут лучше поступить с cur_date=''?
     cur_data = RatesDay.objects.filter(date=cur_date)
     for obj in cur_data:
         context = {
@@ -49,7 +50,7 @@ def rate(request, cur_date=''):  # как тут лучше поступить �
     return render(request, "first/firsttask/rate.html", context=context)
 
 
-def nodata(request, cur_date=''):  # как тут лучше поступить с cur_date=''?
+def nodata(request, cur_date):  # как тут лучше поступить с cur_date=''?
     context = {
         "date": cur_date
     }

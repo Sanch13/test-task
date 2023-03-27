@@ -279,3 +279,30 @@
 2023-03-27 14:15:06.218 | SUCCESS | get_currency_rate_on_date:39 | Запрос по API в банк на 2023-01-17 произошел успешно 
 2023-03-27 14:15:06.231 | SUCCESS | secondtask:30 | Успешная запись в БД
 2023-03-27 14:15:06.452 | SUCCESS | compare_currency_rate:97 | Запрос по API в банк на 2023-01-16 произошел успешно 
+2023-03-27 14:40:51.964 | SUCCESS | get_list_name_currencies:64 | Получил список валют
+2023-03-27 14:41:07.962 | INFO | get_exchange_rates_on_date:17 | Запрос по API в банк на 2023-01-30
+2023-03-27 14:41:08.189 | SUCCESS | get_exchange_rates_on_date:20 | Запрос по API в банк на 2023-01-30 произошел успешно
+2023-03-27 14:41:08.208 | SUCCESS | firsttask:30 | Успешная запись в БД
+2023-03-27 14:42:04.748 | SUCCESS | get_list_name_currencies:64 | Получил список валют
+2023-03-27 14:42:13.416 | INFO | get_exchange_rates_on_date:17 | Запрос по API в банк на 2023-02-20
+2023-03-27 14:42:13.582 | SUCCESS | get_exchange_rates_on_date:20 | Запрос по API в банк на 2023-02-20 произошел успешно
+2023-03-27 14:42:13.602 | SUCCESS | firsttask:30 | Успешная запись в БД
+2023-03-27 14:42:33.566 | INFO | get_currency_rate_on_date:35 | Запрос по API в банк на 2023-02-20
+2023-03-27 14:42:33.746 | SUCCESS | get_currency_rate_on_date:39 | Запрос по API в банк на 2023-02-20 произошел успешно 
+2023-03-27 14:42:33.759 | SUCCESS | secondtask:30 | Успешная запись в БД
+2023-03-27 14:42:33.963 | SUCCESS | compare_currency_rate:97 | Запрос по API в банк на 2023-02-19 произошел успешно 
+2023-03-27 14:43:35.225 | SUCCESS | compare_currency_rate:97 | Запрос по API в банк на 2023-02-19 произошел успешно 
+2023-03-27 14:44:01.579 | INFO | get_exchange_rates_on_date:17 | Запрос по API в банк на 2023-03-07
+2023-03-27 14:44:01.780 | SUCCESS | get_exchange_rates_on_date:20 | Запрос по API в банк на 2023-03-07 произошел успешно
+2023-03-27 14:44:01.799 | SUCCESS | firsttask:30 | Успешная запись в БД
+2023-03-27 14:44:51.337 | INFO | get_currency_rate_on_date:35 | Запрос по API в банк на 2023-03-08
+2023-03-27 14:44:51.514 | SUCCESS | get_currency_rate_on_date:39 | Запрос по API в банк на 2023-03-08 произошел успешно 
+2023-03-27 14:44:51.529 | SUCCESS | secondtask:30 | Успешная запись в БД
+2023-03-27 14:44:51.753 | SUCCESS | compare_currency_rate:97 | Запрос по API в банк на 2023-03-07 произошел успешно 
+2023-03-27 14:46:16.359 | SUCCESS | get_list_name_currencies:64 | Получил список валют
+2023-03-27 15:00:47.786 | SUCCESS | get_list_name_currencies:64 | Получил список валют
+2023-03-27 15:00:55.126 | INFO | get_exchange_rates_on_date:17 | Запрос по API в банк на 2023-06-13
+2023-03-27 15:00:55.277 | SUCCESS | get_exchange_rates_on_date:20 | Запрос по API в банк на 2023-06-13 произошел успешно
+2023-03-27 15:00:55.277 | WARNING | firsttask:25 | Нет данных о курсах валют
+2023-03-27 15:01:02.948 | INFO | get_currency_rate_on_date:35 | Запрос по API в банк на 2023-06-06
+2023-03-27 15:01:03.256 | WARNING | secondtask:25 | Нет данных о курсах валют

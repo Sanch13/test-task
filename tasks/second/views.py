@@ -39,7 +39,7 @@ def secondtask(request):
     return render(request, 'second/secondtask.html', context=context)
 
 
-def rate(request, cur_date=''):  # как тут лучше поступить с cur_date=''?
+def rate(request, cur_date):
     cur_data = RateDay.objects.filter(date=cur_date)
     for obj in cur_data:
         context = {
@@ -50,4 +50,3 @@ def rate(request, cur_date=''):  # как тут лучше поступить �
                                                     cur_rate=obj.data.get("Cur_OfficialRate"))
         }
     return render(request, "second/secondtask/rate.html", context=context)
-

@@ -1,4 +1,4 @@
-from datetime import date, timedelta, datetime
+from datetime import date, timedelta
 import requests
 from first.models import RatesDay
 from logs.settings import logger_1, logger_2
@@ -15,7 +15,7 @@ def get_exchange_rates_on_date(day: str) -> list:
 
     try:
         logger_1.info(f"Запрос по API в банк на {params.get('ondate')}")
-        response = requests.get(url, params=params)
+        response = requests.get(url=url, params=params)
         if response.status_code == 200 and len(response.json()) >= 0:
             logger_1.success(f"Запрос по API в банк на {params.get('ondate')} произошел успешно")
             return response.json()
@@ -33,7 +33,7 @@ def get_currency_rate_on_date(day: str, cur_id: str) -> tuple:
 
     try:
         logger_2.info(f"Запрос по API в банк на {params.get('ondate')}")
-        response = requests.get(url, params=params)
+        response = requests.get(url=url, params=params)
 
         if response.status_code == 200:
             logger_2.success(f"Запрос по API в банк на {params.get('ondate')} произошел успешно ")
@@ -52,20 +52,21 @@ def get_list_name_currencies() -> list:
         "periodicity": 0
     }
 
-    courses = []
+    currencies = []
     try:
-        response = requests.get(url, params=params)
-        if response.status_code == 200 and len(response.json()) > 0:
+        response = requests.get(url=url, params=params)
+        if response.status_code == 200:
             data = response.json()
             for obj in data:
-                courses.append((f"{obj.get('Cur_ID')}", f"{obj.get('Cur_Scale')} "
-                                                        f"{obj.get('Cur_Name')} "
-                                                        f"{obj.get('Cur_Abbreviation')}"))
+                currencies.append((f"{obj.get('Cur_ID')}", f"{obj.get('Cur_Scale')} "
+                                                           f"{obj.get('Cur_Name')} "
+                                                           f"{obj.get('Cur_Abbreviation')}"))
             logger_2.success(f"Получил список валют")
-            return courses
+            return currencies
 
     except Exception as error:
         print(f"Не смог получить список валют, ошибка: ", error)
+        # что тут делать дальше?
 
 
 def get_yesterday_date(day: date) -> str:
@@ -91,7 +92,7 @@ def compare_currency_rate(cur_date: date, cur_id: int, cur_rate: float) -> str:
     params = {
         "ondate": get_yesterday_date(cur_date),
     }
-    yesterday_response = requests.get(url, params=params)
+    yesterday_response = requests.get(url=url, params=params)
     try:
         if yesterday_response.status_code == 200:
             logger_2.success(f"Запрос по API в банк на {params.get('ondate')} произошел успешно ")
@@ -103,3 +104,4 @@ def compare_currency_rate(cur_date: date, cur_id: int, cur_rate: float) -> str:
             return f"Курс остался прежним"
     except Exception as error:
         logger_2.error(f"Не смог получить данные, ошибка: ", error)
+        # что тут делать дальше?
