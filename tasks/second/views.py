@@ -1,52 +1,39 @@
-from django.shortcuts import render, redirect
+from django.http import JsonResponse
+from django.shortcuts import render
 
 from logs.settings import logger_2
 from second.forms import DateRateForm
 from second.models import RateDay
-from services.middleware import get_currency_rate_on_date, compare_currency_rate, \
-    check_record_exists_by_date_cur_id
+from services.middleware import get_currency_rate_on_date, display_error_in_json, \
+    check_record_exists_by_date_cur_id, get_body_and_headers_on_date_cur_id
 
 
-def secondtask(request):
-    if request.method == 'POST':
-        form = DateRateForm(data=request.POST)
+def second_task(request):
+    date = request.GET.get("date")
+    uid = request.GET.get("uid")
 
-        if form.is_valid():
-            cur_date = form.cleaned_data['date'].strftime('%Y-%m-%d')
-            cur_id = form.cleaned_data['cur_id']
+    if check_record_exists_by_date_cur_id(date=date, uid=uid):
+        logger_2.info(f"This instance is in the database. Display from the database")
+        response_body, headers = get_body_and_headers_on_date_cur_id(date=date, uid=uid)
+        return JsonResponse(response_body, headers=headers)
 
-            if check_record_exists_by_date_cur_id(day=cur_date, cur_id=cur_id):
-                logger_2.info(f"Данная запись есть в БД. Отображу из БД")
-                return redirect("second:rate", cur_date=cur_date)
+    response = get_currency_rate_on_date(date=date, uid=uid)
 
-            response = get_currency_rate_on_date(cur_date, cur_id)
+    try:
+        RateDay(date=date, cur_id=uid, data=response).save()
+        logger_2.success("Saved in the DB")
+    except Exception as error:
+        logger_2.error(f"Could not save in the DataBase: {error}")
+        response_body = display_error_in_json()
+        return JsonResponse(response_body)
 
-            if not response:
-                logger_2.warning(f"Нет данных о курсах валют")
-                return redirect("first:nodata", cur_date=cur_date)
+    response_body, headers = get_body_and_headers_on_date_cur_id(date=date, uid=uid)
+    return JsonResponse(response_body, headers=headers)
 
-            try:
-                RateDay(date=cur_date, cur_id=cur_id, data=response).save()
-                logger_2.success(f"Успешная запись в БД")
-                return redirect("second:rate", cur_date=cur_date)
-            except Exception as error:
-                logger_2.error(f"Не смог записать  в БД", error)  # что тут делать?
 
+def second_task_doc(request):
     form = DateRateForm()
     context = {
-        'form': form
+        "form": form
     }
-    return render(request, 'second/secondtask.html', context=context)
-
-
-def rate(request, cur_date):
-    cur_data = RateDay.objects.filter(date=cur_date)
-    for obj in cur_data:
-        context = {
-            "date": obj.date,
-            "data": obj.data,
-            "different_rate": compare_currency_rate(cur_date=obj.date,
-                                                    cur_id=obj.data.get("Cur_ID"),
-                                                    cur_rate=obj.data.get("Cur_OfficialRate"))
-        }
-    return render(request, "second/secondtask/rate.html", context=context)
+    return render(request, "second/secondtaskdoc.html", context=context)

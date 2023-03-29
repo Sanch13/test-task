@@ -1,0 +1,38 @@
+{% extends 'first/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h4 align="center" class="mb-5">Узнать курс определенной валюты за выбранную дату</h4>
+    <p class="just-text">Выберите дату и валюту и нажмите кнопку "Узнать курс"</p>
+    <form action="{% url 'second:secondtask' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2" align="center">
+                    <p>{{ form.date }}</p>
+                </div>
+                <div class="col-sm-4" align="center">
+                    <p>{{ form.uid }}</p>
+                </div>
+                <div class="col-sm-2" align="center">
+                    <button class="btn btn-success" type="submit">Узнать курс</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div>
+        <p>Получение официального курса белорусского рубля по отношению к иностранной валюте на
+            выбранную дату:</p>
+        <p><b>Параметры (GET):</b></p>
+        <p>date – дата, на которую запрашивается курс, формат date=YYYY-MM-DD</p>
+        <p>uid – внутренний код валюты, формат uid=451 </p>
+        <p> Например uid следующих валют, 431 - Доллар США, 451 - Евро</p>
+
+        <p><b>Адрес запроса:</b> http://127.0.0.1:8000/second/secondtask[{date}]&[{uid}]</p>
+        <p>Например, получение официального курса белорусского рубля по отношению к
+            евро, на 14 марта 2023 года:</p>
+        <p></p>
+        <a href="http://127.0.0.1:8000/second/secondtask?date=2023-03-14&uid=451" target="_blank">http://127.0.0
+            .1:8000/second/secondtask?date=2023-03-14&uid=451</a>
+
+    </div>
+{% endblock %}

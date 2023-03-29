@@ -1,11 +1,10 @@
 from django.urls import path
 
-from .views import secondtask, rate
+from .views import second_task, second_task_doc
 
 app_name = 'second'
 
 urlpatterns = [
-    path('secondtask/', secondtask, name='secondtask'),
-    path('rate/<str:cur_date>/', rate, name='rate'),
-    path('rate/', rate, name='rate'),
+    path('secondtask', second_task, name='secondtask'),
+    path('secondtaskdoc/', second_task_doc, name='secondtaskdoc'),
 ]

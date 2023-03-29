@@ -1,57 +1,42 @@
-from django.shortcuts import render, redirect
+from django.http.response import JsonResponse
+from django.shortcuts import render
 
 from first.forms import DateForm
-from logs.settings import logger_1
 from first.models import RatesDay
-from services.middleware import check_record_exists_by_date, get_exchange_rates_on_date
+from logs.settings import logger_1
+from services.middleware import get_exchange_rates_on_date, display_error_in_json, \
+    check_record_exists_by_date, get_body_and_headers_on_date
 
 
 def index(request):
     return render(request, 'first/base.html')
 
 
-def firsttask(request):
-    if request.method == 'POST':
-        form = DateForm(data=request.POST)
+def first_task(request):
+    date = request.GET.get("date")
 
-        if form.is_valid():
-            cur_date = form.cleaned_data['date'].strftime('%Y-%m-%d')
+    if check_record_exists_by_date(date=date):
+        logger_1.info(f"This instance is in the database. Display from the database")
+        response_body, headers = get_body_and_headers_on_date(date=date)
+        return JsonResponse(response_body, headers=headers)
 
-            if check_record_exists_by_date(day=cur_date):
-                logger_1.info(f"Данная запись есть в БД. Отображу из БД")
-                return redirect("first:rate", cur_date=cur_date)
+    response = get_exchange_rates_on_date(date=date)
 
-            response = get_exchange_rates_on_date(cur_date)
-            if not response:
-                logger_1.warning(f"Нет данных о курсах валют")
-                return redirect("first:nodata", cur_date=cur_date)
+    try:
+        RatesDay(date=date, data=response).save()
+        logger_1.success("Saved in the DB")
+    except Exception as error:
+        logger_1.error(f"Could not save in the DataBase: {error}")
+        response_body = display_error_in_json()
+        return JsonResponse(response_body)
 
-            try:
-                RatesDay(date=cur_date, data=response).save()
-                logger_1.success(f"Успешная запись в БД")
-                return redirect("first:rate", cur_date=cur_date)
-            except Exception as error:
-                logger_1.error(f"Не смог записать  в БД", error)  # что тут делать дальше?
+    response_body, headers = get_body_and_headers_on_date(date=date)
+    return JsonResponse(response_body, headers=headers)
 
+
+def first_task_doc(request):
     form = DateForm()
     context = {
         'form': form
     }
-    return render(request, "first/firsttask.html", context=context)
-
-
-def rate(request, cur_date):  # как тут лучше поступить с cur_date=''?
-    cur_data = RatesDay.objects.filter(date=cur_date)
-    for obj in cur_data:
-        context = {
-            "date": obj.date,
-            "data": obj.data,
-        }
-    return render(request, "first/firsttask/rate.html", context=context)
-
-
-def nodata(request, cur_date):  # как тут лучше поступить с cur_date=''?
-    context = {
-        "date": cur_date
-    }
-    return render(request, "first/firsttask/nodata.html", context=context)
+    return render(request, 'first/firsttaskdoc.html', context=context)

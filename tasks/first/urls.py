@@ -1,11 +1,10 @@
 from django.urls import path
 
-from .views import firsttask, rate, nodata
+from .views import *
 
 app_name = 'first'
 
 urlpatterns = [
-    path('firsttask/', firsttask, name='firsttask'),
-    path('rate/<str:cur_date>/', rate, name='rate'),
-    path('nodata/<str:cur_date>/', nodata, name='nodata'),
+    path('firsttask', first_task, name='firsttask'),
+    path('firsttaskdoc/', first_task_doc, name='firsttaskdoc'),
 ]

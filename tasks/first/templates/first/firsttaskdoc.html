@@ -1,0 +1,34 @@
+{% extends "first/base.html" %}
+{% load static %}
+
+{% block content %}
+    <h4 align="center" class="mb-5">Узнать курсы валют на выбранную дату</h4>
+    <p class="just-text">Выберите дату и нажмите кнопку "Узнать курс"</p>
+    <form action="{% url 'first:firsttask' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    {{ form.date }}
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-success" type="submit">Узнать курс</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <p></p>
+    <div>
+        <p>Получение официального курса белорусского рубля по отношению к иностранным валютам на
+            выбранную дату:</p>
+        <p><b>Параметры (GET):</b></p>
+        <p>date – дата, на которую запрашивается курс, формат date=YYYY-MM-DD</p>
+
+        <p><b>Адрес запроса:</b> http://127.0.0.1:8000/first/firsttask[{date}]</p>
+        <p>Например, получение официального курса белорусского рубля по отношению к
+            иностранным валютам, на 6 марта 2023 года:</p>
+        <p></p>
+        <a href="http://127.0.0.1:8000/first/firsttask?date=2023-03-06" target="_blank">http://127.0.0
+            .1:8000/first/firsttask?date=2023-03-06</a>
+
+    </div>
+{% endblock %}
